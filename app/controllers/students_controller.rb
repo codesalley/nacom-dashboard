@@ -15,15 +15,26 @@ class StudentsController < ApplicationController
 
     private 
     def auth_user(idx, psw)
+        jwt_secret = 'this_is_secret'
         student = Student.find_by(index_number: idx)
         
         if !student || student.password != psw 
             render json: {msg: 'invalid credentials'} 
-
         end
         if student.password === psw 
-             render json: student
+            payload = {
+                student: {
+                    id: student.id
+                }
+            }
 
+            token = JWT.encode payload, jwt_secret, 'HS384'
+            
+            decoded = JWT.decode token, jwt_secret, true, {algorithm: 'HS384'}
+
+            p decoded[0]
+
+             render json: {token: token}
         end
 
     end
