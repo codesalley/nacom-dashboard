@@ -1,0 +1,13 @@
+<div class="form-group">
+  <%= form_with model: semister, url: semister_path do |f| %>
+  <div class="form-group mb-3">
+    <%= f.label :semister_name %> <%= f.text_field :name %>
+  </div>
+  <div class="form-group mb-3">
+    <%= f.label :date %> <%= f.datetime_field :date %>
+  </div>
+  <div class="form-group mb-3">
+    <%= f.submit "Submit", disable_with: 'Submiting...' %>
+  </div>
+  <% end %>
+</div>
