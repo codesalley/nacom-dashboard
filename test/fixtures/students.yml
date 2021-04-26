@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  first_name: MyString
+  middle_name: MyString
+  last_name: MyString
+  index_number: MyString
+  password_digest: MyString
+  address: MyString
+  course: MyString
+  enroll_year: 2021-04-26
+
+two:
+  first_name: MyString
+  middle_name: MyString
+  last_name: MyString
+  index_number: MyString
+  password_digest: MyString
+  address: MyString
+  course: MyString
+  enroll_year: 2021-04-26
