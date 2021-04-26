@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_26_113712) do
+ActiveRecord::Schema.define(version: 2021_04_26_155444) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,17 +27,43 @@ ActiveRecord::Schema.define(version: 2021_04_26_113712) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
+  create_table "results", force: :cascade do |t|
+    t.string "course_name"
+    t.date "date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "semister_id"
+    t.bigint "student_id"
+    t.index ["semister_id"], name: "index_results_on_semister_id"
+    t.index ["student_id"], name: "index_results_on_student_id"
+  end
+
+  create_table "semisters", force: :cascade do |t|
+    t.string "name"
+    t.date "date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "admin_id"
+    t.index ["admin_id"], name: "index_semisters_on_admin_id"
+  end
+
   create_table "students", force: :cascade do |t|
     t.string "first_name"
     t.string "middle_name"
     t.string "last_name"
     t.string "index_number"
-    t.string "password_digest"
+    t.string "password"
     t.string "address"
     t.string "course"
     t.date "enroll_year"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "admin_id"
+    t.index ["admin_id"], name: "index_students_on_admin_id"
   end
 
+  add_foreign_key "results", "semisters"
+  add_foreign_key "results", "students"
+  add_foreign_key "semisters", "admins"
+  add_foreign_key "students", "admins"
 end

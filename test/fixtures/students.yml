@@ -5,7 +5,7 @@ one:
   middle_name: MyString
   last_name: MyString
   index_number: MyString
-  password_digest: MyString
+  password: MyString
   address: MyString
   course: MyString
   enroll_year: 2021-04-26
@@ -15,7 +15,7 @@ two:
   middle_name: MyString
   last_name: MyString
   index_number: MyString
-  password_digest: MyString
+  password: MyString
   address: MyString
   course: MyString
   enroll_year: 2021-04-26

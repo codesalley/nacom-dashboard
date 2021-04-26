@@ -5,4 +5,5 @@ class Admin < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :students, class_name: "Student"
+  has_many :semisters, class_name: "Semister"
 end

@@ -5,7 +5,7 @@ class CreateStudents < ActiveRecord::Migration[6.1]
       t.string :middle_name
       t.string :last_name
       t.string :index_number
-      t.string :password_digest
+      t.string :password
       t.string :address
       t.string :course
       t.date :enroll_year
