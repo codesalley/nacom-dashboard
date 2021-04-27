@@ -17,7 +17,7 @@ Rails.application.routes.draw do
 
   # add new new results and asign to student and semister 
 
-  get '/add_results', to: 'admins#add_result'
+  get '/new_results', to: 'admins#new_result'
   post '/add_results', to: 'admins#add_result'
 
   resources :announcements
