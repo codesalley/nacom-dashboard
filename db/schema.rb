@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_27_122929) do
+ActiveRecord::Schema.define(version: 2021_04_27_134324) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,12 +86,19 @@ ActiveRecord::Schema.define(version: 2021_04_27_122929) do
     t.string "index_number"
     t.string "password"
     t.string "address"
-    t.string "course"
     t.date "enroll_year"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "admin_id"
+    t.bigint "department_id"
+    t.string "gender"
+    t.date "dob"
+    t.string "email"
+    t.string "phone_number"
+    t.string "guardian_name"
+    t.string "guardian_contact"
     t.index ["admin_id"], name: "index_students_on_admin_id"
+    t.index ["department_id"], name: "index_students_on_department_id"
   end
 
   add_foreign_key "announcements", "departments"
@@ -103,4 +110,5 @@ ActiveRecord::Schema.define(version: 2021_04_27_122929) do
   add_foreign_key "results", "students"
   add_foreign_key "semisters", "admins"
   add_foreign_key "students", "admins"
+  add_foreign_key "students", "departments"
 end

@@ -8,6 +8,7 @@ class AdminsController <  ApplicationController
     end
     def add_student
         @student = Student.new
+        @departments = Department.all.map{ |d| [d.name, d.id] }
     end
     def add_semister
         @semister = Semister.new
