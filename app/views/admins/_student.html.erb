@@ -1,7 +1,7 @@
 <div class="form-group w-100 d-flex flex-column align-items-center ">
 
   <h2 class="p-3 fw-bold fs-1">New Student</h2>
-  <%= form_with model: student, url: add_student_path do |f|%>
+  <%= form_with model: student, url: add_student_path, method: :post do |f|%>
 
   <div class="form-heading d-flex gap-2">
     <div class="form-left">

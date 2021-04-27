@@ -8,18 +8,18 @@ class AdminsController <  ApplicationController
     end
     def add_student
         @student = Student.new
-        
-        newstudent = current_admin.students.build()
+  
+        newstudent = current_admin.students.build(student_params)
+        flash[:notice] = 'twat'
 
+        p flash[:notice] 
         newstudent.save 
-       if student.save! 
-        render add_student_path, notice: 'student saved'
+       if newstudent.save! 
+         render index, flash[:notice] = "student saved"
        else 
-        render add_student_path, alert: 'error saving student, check all fields'
+        render add_student_path, flash[:alert]  = 'error saving student, check all fields'
        end
-      
-        
-        
+
         @departments = Department.all.map{ |d| [d.name, d.id] }
 
 
@@ -39,9 +39,9 @@ class AdminsController <  ApplicationController
 
     private 
     def student_params 
-        params.require(:Student).permit(:first_name, :middle_name, 
-                                :last_name, :index_number, :password, 
-                                 :address, :enroll_year, :department_id, :gender, :dob, :email, 
-                                 :phone_number, :guardian_name, :guardian_contact)
+        params.permit(:first_name, :middle_name, 
+            :last_name, :index_number, :password, 
+             :address, :enroll_year, :department_id, :gender, :dob, :email, 
+             :phone_number, :guardian_name, :guardian_contact) 
     end
 end
