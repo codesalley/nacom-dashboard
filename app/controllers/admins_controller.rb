@@ -6,25 +6,26 @@ class AdminsController <  ApplicationController
         @announcements = Announcement.all
 
     end
+
+    def new_student 
+        @student = Student.new
+        @departments = Department.all.map{ |d| [d.name, d.id] }
+    end
+
     def add_student
         @student = Student.new
-  
         newstudent = current_admin.students.build(student_params)
-        flash[:notice] = 'twat'
-
-        p flash[:notice] 
-        newstudent.save 
-       if newstudent.save! 
-         render index, flash[:notice] = "student saved"
-       else 
-        render add_student_path, flash[:alert]  = 'error saving student, check all fields'
-       end
-
-        @departments = Department.all.map{ |d| [d.name, d.id] }
-
-
-
+        newstudent.save
+        if newstudent.save
+            redirect_to new_student_path, notice: "Student added sucessfully"
+        else
+            redirect_to new_student_path, alert: "Fail to add student, check all fields"
+        end
     end
+
+
+
+
     def add_semister
         @semister = Semister.new
 
@@ -39,7 +40,7 @@ class AdminsController <  ApplicationController
 
     private 
     def student_params 
-        params.permit(:first_name, :middle_name, 
+        params.require(:student).permit(:first_name, :middle_name, 
             :last_name, :index_number, :password, 
              :address, :enroll_year, :department_id, :gender, :dob, :email, 
              :phone_number, :guardian_name, :guardian_contact) 

@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   
   # add new student to the databse 
 
-  get '/add_student', to: 'admins#add_student'
+  get '/new_student', to: 'admins#new_student'
   post '/add_student', to: 'admins#add_student'
 
   # add new simsters or coharts

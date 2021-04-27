@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_27_134324) do
+ActiveRecord::Schema.define(version: 2021_04_27_204658) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,13 @@ ActiveRecord::Schema.define(version: 2021_04_27_134324) do
     t.index ["student_id"], name: "index_announcements_on_student_id"
   end
 
+  create_table "courses", force: :cascade do |t|
+    t.string "title"
+    t.integer "score"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "departments", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -60,12 +67,16 @@ ActiveRecord::Schema.define(version: 2021_04_27_134324) do
   end
 
   create_table "results", force: :cascade do |t|
-    t.string "course_name"
-    t.date "date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "semister_id"
     t.bigint "student_id"
+    t.string "basic_nursing"
+    t.string "anatomy"
+    t.string "midwifery"
+    t.string "statictis"
+    t.string "another_demo"
+    t.string "last_demo_course"
     t.index ["semister_id"], name: "index_results_on_semister_id"
     t.index ["student_id"], name: "index_results_on_student_id"
   end
