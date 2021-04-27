@@ -20,6 +20,10 @@ Rails.application.routes.draw do
   get '/add_results', to: 'admins#add_result'
   post '/add_results', to: 'admins#add_result'
 
+  resources :announcements
+  resources :messages
+  resources :departments
+
 
 
   root 'admins#index'

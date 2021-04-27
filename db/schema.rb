@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_27_100802) do
+ActiveRecord::Schema.define(version: 2021_04_27_122929) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,12 +33,18 @@ ActiveRecord::Schema.define(version: 2021_04_27_100802) do
     t.string "image"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "student_id"
+    t.bigint "department_id"
+    t.index ["department_id"], name: "index_announcements_on_department_id"
+    t.index ["student_id"], name: "index_announcements_on_student_id"
   end
 
   create_table "departments", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "student_id"
+    t.index ["student_id"], name: "index_departments_on_student_id"
   end
 
   create_table "messages", force: :cascade do |t|
@@ -47,6 +53,10 @@ ActiveRecord::Schema.define(version: 2021_04_27_100802) do
     t.string "image"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "student_id"
+    t.bigint "department_id"
+    t.index ["department_id"], name: "index_messages_on_department_id"
+    t.index ["student_id"], name: "index_messages_on_student_id"
   end
 
   create_table "results", force: :cascade do |t|
@@ -84,6 +94,11 @@ ActiveRecord::Schema.define(version: 2021_04_27_100802) do
     t.index ["admin_id"], name: "index_students_on_admin_id"
   end
 
+  add_foreign_key "announcements", "departments"
+  add_foreign_key "announcements", "students"
+  add_foreign_key "departments", "students"
+  add_foreign_key "messages", "departments"
+  add_foreign_key "messages", "students"
   add_foreign_key "results", "semisters"
   add_foreign_key "results", "students"
   add_foreign_key "semisters", "admins"
