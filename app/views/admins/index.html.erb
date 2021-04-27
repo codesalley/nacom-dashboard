@@ -1,4 +1,18 @@
-<div>Logged in admin</div>
-
-<%= link_to 'add new student', students_path %> <%= link_to 'add
-results',results_path %> <%= link_to 'add new semister', semister_path %>
+<div class="main row w-100 m-0">
+  <div class="left-side-bar col-sm-3 shadow-sm mh-100 overflow-hidden">
+    all departments
+  </div>
+  <div class="center-section col-sm-6 overflow-hidden">
+    <div class="inner-nav shadow-sm d-flex justify-content-around w-100 p-5">
+      <%= link_to 'Add Student', add_student_path , class: 'btn btn-success
+      text-decoration-none text-white fw-bold'%> <%= link_to 'Add
+      Results',add_results_path, class: 'btn btn-info text-decoration-none
+      text-white fw-bold' %> <%= link_to 'Add New Semister', add_semister_path,
+      class: 'text-decoration-none btn btn-info text-white fw-bold' %>
+    </div>
+    All course
+  </div>
+  <div class="right-side-bar col-sm-3 shadow-sm mh-100">
+    schedule tasks here
+  </div>
+</div>

@@ -7,18 +7,18 @@ Rails.application.routes.draw do
   
   # add new student to the databse 
 
-  get '/student', to: 'admins#add_student'
-  post '/student', to: 'admins#add_student'
+  get '/add_student', to: 'admins#add_student'
+  post '/add_student', to: 'admins#add_student'
 
   # add new simsters or coharts
 
-  get '/semister', to: 'admins#add_semister'
-  post '/semister', to: 'admins#add_semister'
+  get '/add_semister', to: 'admins#add_semister'
+  post '/add_semister', to: 'admins#add_semister'
 
   # add new new results and asign to student and semister 
 
-  get '/results', to: 'admins#add_result'
-  post '/results', to: 'admins#add_result'
+  get '/add_results', to: 'admins#add_result'
+  post '/add_results', to: 'admins#add_result'
 
 
 
