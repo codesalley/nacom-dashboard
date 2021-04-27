@@ -22,5 +22,13 @@ body {
   height: 93vh;
 }
 
-.navbar {
+.form-right {
+  width: 250px;
+  position: relative;
 }
+
+.passport {
+  width: inherit;
+}
+
+
