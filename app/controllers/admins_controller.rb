@@ -34,20 +34,25 @@ class AdminsController <  ApplicationController
     
     def add_semister
         @semister = Semister.new
-        
     end
 
     def new_result
-
+        p params
+        @result = Result.new
         @departments = Department.all.map{ |d| [d.name, d.id] }
+        @semister_options = Semister.all.map{ |i| [i.name, i.id]}
+        @students_options = Student.all.map{ |i|  ["#{i.first_name} , #{i.middle_name}  #{i.last_name} ", i.id ] }
     end
 
 
     def add_result
-        
-        @result = Result.new
-        @semister_options = Semister.all.map{ |i| [i.name, i.id]}
-        @students_options = Student.all.map{ |i|  ["#{i.first_name} , #{i.middle_name}  #{i.last_name} ", i.id ] }
+        newResult = Result.new(result_params)
+        newResult.save 
+        if newResult.save 
+            redirect_to new_results_path, notice: 'Result added'
+        else
+            redirect_to new_results_path, alert: 'Chech all require fields'
+        end
         
     end
     
@@ -57,5 +62,9 @@ class AdminsController <  ApplicationController
             :last_name, :index_number, :password, 
              :address, :enroll_year, :department_id, :gender, :dob, :email, 
              :phone_number, :guardian_name, :guardian_contact) 
+    end
+    def result_params 
+        params.require(:result).permit(:semister_id, :student_id, :basic_nursing, 
+                                        :anatomy, :midwifery, :statictis, :another_demo, :last_demo_course)   
     end
 end

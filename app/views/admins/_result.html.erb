@@ -6,17 +6,12 @@
 <%= form_with model: result, url: add_results_path, method: :post do |f| %>
 
 <div class="form-group mb-3 d-flex flex-column form-floating">
-  <%= f.text_field :anatomy , class:"form-control", id:"floatingInput"%>
-  <%= f.label :anatomy, "Anatomy Grade", for:"floatingInput" %> 
-</div>
-
-<div class="form-group mb-3 d-flex flex-column form-floating">
-  <%= f.select('Semister name',@semister_options, {}, class:"form-control", id:"floatingInput" ) %>
+  <%= f.select('semister_id',@semister_options, {}, class:"form-control", id:"floatingInput" ) %>
   <%= f.label :Semister, "Semister", for:"floatingInput" %>
 </div>
 
 <div class="form-group mb-3 d-flex flex-column form-floating">
-  <%= f.select('Student_id',@students_options, {}, class:"form-control", id:"floatingInput" ) %>
+  <%= f.select('student_id',@students_options, {}, class:"form-control", id:"floatingInput" ) %>
   <%= f.label :Student, "Student Name", for:"floatingInput" %> 
 </div>
 
