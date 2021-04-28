@@ -4,6 +4,7 @@ class AdminsController <  ApplicationController
         @student = Student.new
         @departments = Department.all
         @announcements = Announcement.all
+        @semister = Semister.all
         
     end
  

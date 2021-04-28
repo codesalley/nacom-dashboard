@@ -13,6 +13,9 @@
  *= require_tree .
  *= require_self
  */
+ @import "trix/dist/trix";
+ @import "./actiontext.scss";
+
 
 body {
   height: 100vh;
@@ -30,5 +33,11 @@ body {
 .passport {
   width: inherit;
 }
+
+.d-img img{
+  width: 50px;
+}
+
+
 
 
