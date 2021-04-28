@@ -21,7 +21,10 @@
         <%= render 'semister', semister: @semister %>
         <%= render 'department', department: @departments %>
     </div>
-    All course
+   <div class="stream overflow-scroll">
+     <h2 class="text-center p-3">Recent Announcements</h2>
+     <%= render 'all_announcements', announcements: @announcements %>
+   </div>
   </div>
   <div class="right-side-bar col-sm-3 shadow-sm mh-100">
     <h2 class="text-center p-3">All Semisters</h2>

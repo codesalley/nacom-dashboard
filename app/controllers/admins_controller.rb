@@ -4,8 +4,7 @@ class AdminsController <  ApplicationController
         @student = Student.new
         @departments = Department.all
         @announcements = Announcement.all
-        @semister = Semister.all
-        
+        @semister = Semister.all    
     end
  
     # new student form page controller action
@@ -40,7 +39,7 @@ class AdminsController <  ApplicationController
         if newResult.save 
             redirect_to new_results_path, notice: 'Result added'
         else
-            redirect_to new_results_path, alert: 'Chech all require fields'
+            redirect_to new_results_path, alert: 'Check all require fields'
         end
         
     end
