@@ -1,9 +1,9 @@
 <% announcements.each do |anounce| %>
-<div class="anouncement-card d-flex gap-3 align-items-center justify-content-center shadow-sm  p-2">
+<div class="anouncement-card d-flex gap-3 align-items-center shadow-sm  p-2 m-3">
     <div class="img">
       <%= image_tag('demo.png') %>
     </div>
-    <div class="detail-card">
+    <div class="detail-card self-center">
         <h3><%= anounce.title %> </h3>
         <small> <%= anounce.content %> </small>
     </div>
