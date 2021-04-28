@@ -28,9 +28,11 @@ Rails.application.routes.draw do
   post '/add_message', to: 'messages#create'
 
 
+  resources :announcements
+
+  post '/add_announcement', to: 'announcements#create'
   
 
-  resources :announcements
   resources :departments
 
 
