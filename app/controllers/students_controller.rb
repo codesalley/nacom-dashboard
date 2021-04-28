@@ -1,6 +1,6 @@
 class StudentsController < ApplicationController
     respond_to :json
-    before_action :authorized
+    before_action :authorized, except: %i[index]
 
 
     def index 
@@ -9,11 +9,19 @@ class StudentsController < ApplicationController
         auth_user(student_inx, student_password)
     end
     def messages 
-        render json: {msg: 'student messages'}
+        hashed = getUser
+        id = hashed[0]['id']
+        studentMessages = Student.find_by(id: id)
+        data = studentMessages.messages
+        render json: data
         
     end
     def announcements
-        render json: {msg: 'student announcements'}
+        hashed = getUser
+       id = hashed[0]['id']
+       studentAnnouncement = Student.find_by(id: id)
+       data = studentAnnouncement.department
+        render json: data
         
     end
     def results 
@@ -25,23 +33,30 @@ class StudentsController < ApplicationController
     def authorized 
         token = request.headers[:token]
         if !token
-            head :forbidden
+            render json: {msg: 'Invalid request'}
+            return
         end
         if !auth(token)
-            head :forbidden
+            render json: {msg: 'Invalid request'}
+            return
         end
 
     end
 
     private 
+    JWT_TOKEN = 'this_is_secret'
+    def getUser 
+        decoded = JWT.decode request.headers[:token], JWT_TOKEN, true, {algorithm: 'HS384'}
+        return decoded
+    end
 
     def auth(t)
-        jwt_secret = 'this_is_secret'
+ 
        
         return false unless t.present?
         if t
         begin
-            decoded = JWT.decode t, jwt_secret, true, {algorithm: 'HS384'}
+            decoded = JWT.decode t, JWT_TOKEN, true, {algorithm: 'HS384'}
             return true
         rescue 
             return false
@@ -52,7 +67,7 @@ class StudentsController < ApplicationController
 
 
     def auth_user(idx, psw)
-        jwt_secret = 'this_is_secret'
+
         student = Student.find_by(index_number: idx)
         
         if !student || student.password != psw 
@@ -61,12 +76,12 @@ class StudentsController < ApplicationController
         end
         if student.password === psw 
             payload = {
-                student: {
+              
                     id: student.id
-                }
+       
             }
 
-            token = JWT.encode payload, jwt_secret, 'HS384'
+            token = JWT.encode payload, JWT_TOKEN, 'HS384'
              render json: {token: token}
              return 
         end
