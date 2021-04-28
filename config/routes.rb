@@ -23,10 +23,14 @@ Rails.application.routes.draw do
   get '/new_results', to: 'admins#new_result'
   post '/add_results', to: 'admins#add_result'
 
+  resources :messages
+
+  post '/add_message', to: 'messages#create'
+
+
   
 
   resources :announcements
-  resources :messages
   resources :departments
 
 
