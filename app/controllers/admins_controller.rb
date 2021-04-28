@@ -6,18 +6,13 @@ class AdminsController <  ApplicationController
         @announcements = Announcement.all
         
     end
-    
-    def new_result
-        @result = Result.new 
-        @semister_options = Semister.all.map{ |i| [i.name, i.id]}
-    end
-    def add_result 
-    end
-
+ 
+    # new student form page controller action
     def new_student 
         @student = Student.new
+        @departments = Department.all.map{ |d| [d.name, d.id] }
     end
-    
+    # new student add controller action
     def add_student
         @student = Student.new
         newstudent = current_admin.students.build(student_params)
@@ -28,23 +23,16 @@ class AdminsController <  ApplicationController
             redirect_to new_student_path, alert: "Fail to add student, check all fields"
         end
     end
-    
-    
-    
-    
-    def add_semister
-        @semister = Semister.new
-    end
 
+        # add results form action
     def new_result
-        p params
         @result = Result.new
         @departments = Department.all.map{ |d| [d.name, d.id] }
         @semister_options = Semister.all.map{ |i| [i.name, i.id]}
         @students_options = Student.all.map{ |i|  ["#{i.first_name} , #{i.middle_name}  #{i.last_name} ", i.id ] }
     end
 
-
+    # add student controller action
     def add_result
         newResult = Result.new(result_params)
         newResult.save 
@@ -55,6 +43,32 @@ class AdminsController <  ApplicationController
         end
         
     end
+
+    # add new semister controller action sent from modal
+
+    def add_semister 
+       newSemister  = Semister.new(name:params[:name], date:params[:date])
+       newSemister.save 
+       if newSemister.save 
+        redirect_to root_path, notice: 'Semister added successfully'
+       else 
+        redirect_to root_path, alert: 'Name is required'
+       end
+
+    end
+
+    # add new department controller action from modal 
+
+    def add_department 
+       newDepartment = Department.new(name: params[:name])
+       newDepartment.save 
+       if newDepartment.save 
+        redirect_to root_path, notice: 'Department added successfully'
+       else 
+        redirect_to root_path, alert: 'Name is required'
+       end
+    end
+
     
     private 
     def student_params 

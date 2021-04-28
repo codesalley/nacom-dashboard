@@ -12,13 +12,18 @@ Rails.application.routes.draw do
 
   # add new simsters or coharts
 
-  get '/add_semister', to: 'admins#add_semister'
   post '/add_semister', to: 'admins#add_semister'
+
+  # new department post action 
+
+  post '/add_department', to: 'admins#add_department'
 
   # add new new results and asign to student and semister 
 
   get '/new_results', to: 'admins#new_result'
   post '/add_results', to: 'admins#add_result'
+
+  
 
   resources :announcements
   resources :messages
