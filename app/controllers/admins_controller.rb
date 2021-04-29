@@ -16,7 +16,6 @@ class AdminsController <  ApplicationController
     def add_student
         @student = Student.new
         department = Department.find_by(id: params[:student][:department_id])
-        byebug
         newstudent = department.students.build(student_params)
         newstudent.save
         if newstudent.save
@@ -49,7 +48,7 @@ class AdminsController <  ApplicationController
     # add new semister controller action sent from modal
 
     def add_semister 
-       newSemister  = Semister.new(name:params[:name], date:params[:date])
+       newSemister  = Semister.new(semister_params)
        newSemister.save 
        if newSemister.save 
         redirect_to root_path, notice: 'Semister added successfully'
@@ -82,5 +81,8 @@ class AdminsController <  ApplicationController
     def result_params 
         params.require(:result).permit(:semister_id, :student_id, :basic_nursing, 
                                         :anatomy, :midwifery, :statictis, :another_demo, :last_demo_course)   
+    end
+    def semister_params 
+        params.require(:semister).permit(:name, :date)
     end
 end
