@@ -50,17 +50,15 @@ class StudentsController < ApplicationController
     private 
     JWT_TOKEN = 'this_is_secret'
     def getUser 
-        decoded = JWT.decode request.headers[:token], JWT_TOKEN, true, {algorithm: 'HS384'}
+        decoded = JWT.decode request.headers[:token], JWT_TOKEN, true, {algorithm: 'HS256'}
         return decoded
     end
 
     def auth(t)
- 
-       
         return false unless t.present?
         if t
         begin
-            decoded = JWT.decode t, JWT_TOKEN, true, {algorithm: 'HS384'}
+            decoded = JWT.decode t, JWT_TOKEN, true, {algorithm: 'HS256'}
             return true
         rescue 
             return false
@@ -73,19 +71,18 @@ class StudentsController < ApplicationController
     def auth_user(idx, psw)
 
         student = Student.find_by(index_number: idx)
-        
         if !student || student.password != psw 
             render json: {msg: 'invalid credentials'} 
             return 
         end
         if student.password === psw 
-            payload = {
-              
-                    id: student.id
-       
+            expire_time = Time.now.to_i + 2 * 3600
+            payload = {         
+                id: student.id,
+                exp: expire_time
             }
 
-            token = JWT.encode payload, JWT_TOKEN, 'HS384'
+            token = JWT.encode payload, JWT_TOKEN, 'HS256'
              render json: {token: token}
              return 
         end

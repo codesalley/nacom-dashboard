@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
 
   resources :students, only: [:index, :show, :auth]
-
   devise_for :admins
+  resources :messages
+  resources :announcements
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   
   # add new student to the databse 
@@ -14,6 +15,7 @@ Rails.application.routes.draw do
   get '/announcements', to: 'students#announcements'
   # rsults routes 
   get '/results', to: 'students#results'
+
 
 
   get '/new_student', to: 'admins#new_student'
@@ -32,12 +34,10 @@ Rails.application.routes.draw do
   get '/new_results', to: 'admins#new_result'
   post '/add_results', to: 'admins#add_result'
 
-  resources :messages
 
   post '/add_message', to: 'messages#create'
 
 
-  resources :announcements
 
   post '/add_announcement', to: 'announcements#create'
   
