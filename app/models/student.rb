@@ -10,6 +10,6 @@ class Student < ApplicationRecord
     has_many :messages, class_name: "Message", foreign_key: "student_id"
     has_many :announcements, through: :department
     
-    # has_one_attached :passport, dependent: :destroy
+    has_one_attached :passport, dependent: :destroy
 
 end

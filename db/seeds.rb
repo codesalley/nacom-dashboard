@@ -7,5 +7,8 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 admin = Admin.new(email: 'admin@admin.com', encrypted_password: Devise::Encryptor.digest(Admin, 'testtest'))
+Department.create(name: 'Nursing Assistants')
+Department.create(name: 'Nursing ')
+Department.create(name: 'Another test Department ')
 
 admin.save!(:validate => false)
