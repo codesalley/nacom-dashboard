@@ -20,12 +20,16 @@ class StudentsController < ApplicationController
         hashed = getUser
        id = hashed[0]['id']
        studentAnnouncement = Student.find_by(id: id)
-       data = studentAnnouncement.department.content.body.to_html
+       data = studentAnnouncement.department.announcements
         render json: data
         
     end
     def results 
-        render json: {msg: 'student results'}
+        hashed = getUser
+        id = hashed[0]['id']
+        studentResults = Student.find_by(id: id)
+        data = studentResults.results
+        render json: data
     end
 
 

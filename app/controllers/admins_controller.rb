@@ -19,6 +19,7 @@ class AdminsController <  ApplicationController
         newstudent = department.students.build(student_params)
         newstudent.save
         if newstudent.save
+            StudentMailer.with(email: student_params[:email]).welcome_mail.deliver_later
             redirect_to new_student_path, notice: "Student added sucessfully"
         else
             redirect_to new_student_path, alert: "Fail to add student, check all fields"
@@ -64,6 +65,7 @@ class AdminsController <  ApplicationController
        newDepartment = Department.new(name: params[:name])
        newDepartment.save 
        if newDepartment.save 
+      
         redirect_to root_path, notice: 'Department added successfully'
        else 
         redirect_to root_path, alert: 'Name is required'
