@@ -3,6 +3,4 @@ class Admin < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :rememberable, :validatable
 
-  has_many :students, class_name: "Student"
-  has_many :semisters, class_name: "Semister"
 end

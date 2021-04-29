@@ -20,7 +20,7 @@ class StudentsController < ApplicationController
         hashed = getUser
        id = hashed[0]['id']
        studentAnnouncement = Student.find_by(id: id)
-       data = studentAnnouncement.department
+       data = studentAnnouncement.department.content.body.to_html
         render json: data
         
     end

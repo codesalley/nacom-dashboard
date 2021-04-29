@@ -15,7 +15,9 @@ class AdminsController <  ApplicationController
     # new student add controller action
     def add_student
         @student = Student.new
-        newstudent = current_admin.students.build(student_params)
+        department = Department.find_by(id: params[:student][:department_id])
+        byebug
+        newstudent = department.students.build(student_params)
         newstudent.save
         if newstudent.save
             redirect_to new_student_path, notice: "Student added sucessfully"
@@ -73,9 +75,9 @@ class AdminsController <  ApplicationController
     private 
     def student_params 
         params.require(:student).permit(:first_name, :middle_name, 
-            :last_name, :index_number, :password, 
-             :address, :enroll_year, :department_id, :gender, :dob, :email, 
-             :phone_number, :guardian_name, :guardian_contact) 
+            :last_name, :index_number, :password, :department_id,
+             :address, :enroll_year, :gender, :dob, :email, 
+             :phone_number, :guardian_name, :guardian_contact, :passport) 
     end
     def result_params 
         params.require(:result).permit(:semister_id, :student_id, :basic_nursing, 
