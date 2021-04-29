@@ -14,7 +14,7 @@ class AnnouncementsController < ApplicationController
             department = Department.find_by(id: params[:department_id])
             if department.present?
         
-                department.announcements.build(title: params[:title], content: params[:content])
+                department.announcements.build(title: params[:title], details: params[:details])
                  department.save 
                 if department.save 
                     redirect_to root_path, notice: 'Announcement sent'

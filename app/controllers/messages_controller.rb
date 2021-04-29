@@ -12,7 +12,7 @@ class MessagesController < ApplicationController
     def create 
         student = Student.find_by(index_number: params[:index_number])
         if student.present?
-           studentMsg = student.messages.build(title: params[:title], content: params[:content])
+           studentMsg = student.messages.build(title: params[:title], details: params[:details])
           if studentMsg.save
             redirect_to root_path, notice: 'Message Sent '
 
