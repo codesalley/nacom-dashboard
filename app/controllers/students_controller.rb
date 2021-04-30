@@ -9,6 +9,12 @@ class StudentsController < ApplicationController
         student_password = params[:password]
         auth_user(student_inx, student_password)
     end
+    def me 
+        hashed = getUser
+        id = hashed[0]['id']
+        student = Student.find_by(id: id)
+        render json: student
+    end
     def messages 
         hashed = getUser
         id = hashed[0]['id']
