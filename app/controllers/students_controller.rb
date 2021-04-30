@@ -38,11 +38,11 @@ class StudentsController < ApplicationController
     def authorized 
         token = request.headers[:token]
         if !token
-            render json: {msg: 'Invalid request'}
+            render json: {msg: 'Invalid request'}, status: 401
             return
         end
         if !auth(token)
-            render json: {msg: 'Invalid request'}
+            render json: {msg: 'Invalid request'}, status: 401
             return
         end
 
@@ -73,7 +73,7 @@ class StudentsController < ApplicationController
 
         student = Student.find_by(index_number: idx)
         if !student || student.password != psw 
-            render json: {msg: 'invalid credentials'} 
+            render json: {msg: 'invalid credentials'}, status: 401
             return 
         end
         if student.password === psw 
