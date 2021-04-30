@@ -18,7 +18,7 @@ class StudentsController < ApplicationController
                             last_name: studentdata.last_name, 
                                 index_number: studentdata.index_number, 
                                 email: studentdata.email, 
-                                passport: !studentdata.passport.nil ? false : studentdata.passport ,
+                                passport: !studentdata.passport.nil? ? false : studentdata.passport ,
                                 phone_number: studentdata.phone_number} 
     end
     def messages 
