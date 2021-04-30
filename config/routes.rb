@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   
   # add new student to the databse 
 
+  post '/student', to: 'students#index'
+
   post '/auth', to:'students#auth'
   # student messages route
   get '/messages', to: 'students#messages'
