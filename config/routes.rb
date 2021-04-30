@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   # rsults routes 
   get '/results', to: 'students#results'
 
-  get '/me', to: 'students#me'
+  get '/me', to: 'students#welcome'
 
   get '/new_student', to: 'admins#new_student'
   post '/add_student', to: 'admins#add_student'
