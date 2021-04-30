@@ -1,0 +1,57 @@
+
+<div class="result form-group w-100 d-flex flex-column align-items-center overflow-scroll">
+
+  <h2  class="p-3 fw-bold fs-1">Add Student Result</h2>
+
+<%= form_with model: result, url: add_results_path, method: :post do |f| %>
+
+<div class="form-group mb-3 d-flex flex-column form-floating">
+  <%= f.select('semister_id',@semister_options, {}, class:"form-control", id:"floatingInput" ) %>
+  <%= f.label :Semister, "Semister", for:"floatingInput" %>
+</div>
+
+<div class="form-group mb-3 d-flex flex-column form-floating">
+  <%= f.select('student_id',@students_options, {}, class:"form-control", id:"floatingInput" ) %>
+  <%= f.label :Student, "Student Name", for:"floatingInput" %> 
+</div>
+
+<div class="form-group mb-3 d-flex flex-column form-floating">
+  <%= f.number_field :basic_nursing , class:"form-control", id:"floatingInput"%>
+  <%= f.label :basic_nursing, "Basic Nursing Grade", for:"floatingInput" %> 
+</div>
+
+<div class="form-group mb-3 d-flex flex-column form-floating">
+  <%= f.number_field :anatomy , class:"form-control", id:"floatingInput"%>
+  <%= f.label :anatomy, "Anatomy Grade", for:"floatingInput" %> 
+</div>
+
+
+<div class="form-group mb-3 d-flex flex-column form-floating">
+  <%= f.number_field :midwifery , class:"form-control", id:"floatingInput"%>
+  <%= f.label :midwifery, "Midwifery Grade", for:"floatingInput" %> 
+</div>
+
+<div class="form-group mb-3 d-flex flex-column form-floating">
+  <%= f.number_field :statictis , class:"form-control", id:"floatingInput"%>
+  <%= f.label :statictis, "Statictis Grade", for:"floatingInput" %> 
+</div>
+
+<div class="form-group mb-3 d-flex flex-column form-floating">
+  <%= f.number_field :another_demo , class:"form-control", id:"floatingInput"%>
+  <%= f.label :another_demo, "Another_course Grade", for:"floatingInput" %> 
+</div>
+
+<div class="form-group mb-3 d-flex flex-column form-floating">
+  <%= f.number_field :last_demo_course , class:"form-control", id:"floatingInput"%>
+  <%= f.label :last_demo_course, "Last_course Grade", for:"floatingInput" %> 
+</div>
+
+<div class="form-group mb-3 d-flex flex-column align-items-center">
+  <%= f.submit "Submit", disable_with: 'Submiting...',  class: 'btn btn-outline-success w-100 p-2'  %>
+</div>
+
+<% end %>
+
+</div>
+
+

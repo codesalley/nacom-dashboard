@@ -1,0 +1,25 @@
+<div class="main-session d-flex flex-column align-items-center justify-items-center vh-100">
+
+
+<h2 class="p-4">Admin Session</h2>
+
+<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <div class="field d-flex flex-column mb-3">
+    <%= f.label :email %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
+  </div>
+
+  <div class="field d-flex flex-column mb-3">
+    <%= f.label :password %>
+    <%= f.password_field :password, autocomplete: "current-password" , class: 'form-control'%>
+  </div>
+
+  <div class="actions d-flex flex-column mb-3">
+    <%= f.submit "Log in", class:'btn btn-outline-primary' %>
+  </div>
+<% end %>
+
+  
+</div>
+
+

@@ -1,0 +1,12 @@
+<% department.each do |item| %>
+    <div class="main-card d-flex shadow-sm p-3" >
+        <div class="d-img">
+            <%= image_tag('demo.png') %>
+        </div>
+        <div class="detail m-0">
+            <p class="m-0"><%= item.name %></p>
+            <small>Students:  <%= item.students.size %></small>
+        </div>
+  </div>
+    
+<% end %>

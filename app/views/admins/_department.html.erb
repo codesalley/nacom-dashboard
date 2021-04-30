@@ -1,0 +1,25 @@
+<div class="modal fade" id="static-1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Add New Department</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <%= form_with modal: department, url: add_department_path do |f| %>
+            <div class="form-group mb-3 d-flex flex-column align-items-center form-floating">
+                <%= f.text_field :name, class:"form-control", id:"floatingInput" %>
+                <%= f.label :department, "department Name", for:"floatingInput" %>
+            </div>
+            <div class=" form-group mb-3 d-flex flex-column align-items-center">
+       
+                <%= f.submit "Submit", disable_with: 'Submiting...',class: 'btn btn-outline-success w-100 p-2' %>
+           
+            </div>
+
+            <% end %>
+        </div>
+
+      </div>
+    </div>
+  </div>

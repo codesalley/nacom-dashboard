@@ -1,0 +1,23 @@
+<%= form_with modal: annoucement, url: add_announcement_path, method: :post do |f| %>
+
+<div class="form-group mb-3 d-flex flex-column form-floating">
+    <%= f.select('department_id',@departments, {}, class:"form-control", id:"floatingInput" ) %>
+    <%= f.label :Department, "Department", for:"floatingInput" %>
+  </div>
+
+<div class="form-group form-floating mb-3">
+    <%= f.text_field :title, class:"form-control", id:"floatingInput" %>
+    <%= f.label :Title , "Message Title ", for:"floatingInput" %>
+</div>
+
+<div class="form-group mb-3">
+    <h3 class="p-2 fw-bold">Message Content</h3>
+    <%= f.text_area :details, class: 'form-control p-2 rich-text' %>
+</div>
+
+<div class="footer mb-3">
+    <%= f.submit "Send", disable_with: 'Sending...', class: 'btn btn-success px-3 py-2' %>
+    <%= link_to 'Cancel', root_path, class:'btn btn-danger px-3 py-2' %>
+</div>
+
+<% end %>

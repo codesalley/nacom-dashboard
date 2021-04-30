@@ -1,0 +1,35 @@
+<div class="main row w-100 m-0">
+  <div class="left-side-bar col-sm-3 shadow-sm mh-100 overflow-scroll">
+    <h2 class="text-center p-3">All Departments</h2>
+    <div class="department-list d-flex flex-column gap-2 mt-2">
+      <%= render 'all_departments', department: @departments %>
+
+    </div>
+  </div>
+  <div class="center-section col-sm-6 overflow-hidden">
+    <div class="inner-nav shadow-sm d-flex justify-content-around w-100 p-5">
+      <%= link_to 'Add Student', new_student_path , class: 'btn btn-success
+      text-decoration-none text-white fw-bold'%> <%= link_to 'Add
+      Results',new_results_path, class: 'btn btn-info text-decoration-none
+      text-white fw-bold' %>
+       <button type="button" class="text-decoration-none btn btn-success text-white fw-bold" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+         Add Semister
+        </button>
+        <button type="button" class="text-decoration-none btn btn-info text-white fw-bold" data-bs-toggle="modal" data-bs-target="#static-1">
+          Add Department
+        </button>
+        <%= render 'semister', semister: @semister %>
+        <%= render 'department', department: @departments %>
+    </div>
+   <div class="stream overflow-scroll">
+     <h2 class="text-center p-3">Recent Announcements</h2>
+     <%= render 'all_announcements', announcements: @announcements %>
+   </div>
+  </div>
+  <div class="right-side-bar col-sm-3 shadow-sm mh-100">
+    <h2 class="text-center p-3">All Semisters</h2>
+    <div class="semister-list d-flex flex-column">
+      <%= render 'all_semisters', semisters: @semister %>
+    </div>
+  </div>
+</div>
