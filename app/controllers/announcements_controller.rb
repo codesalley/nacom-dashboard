@@ -1,4 +1,4 @@
-class DASHBOARD::AnnouncementsController < ApplicationController
+class AnnouncementsController < ApplicationController
     before_action :authenticate_admin!
 
     def new 

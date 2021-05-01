@@ -1,4 +1,4 @@
-class DASHBOARD::MessagesController < ApplicationController
+class MessagesController < ApplicationController
     before_action :authenticate_admin!
 
     def index
