@@ -1,6 +1,13 @@
 Rails.application.routes.draw do
 
-  
+  namespace :api, :constraints => {:subdomain => "api"} do
+
+      resources :people
+
+  end
+  namespace :api, :constraints => {:subdomain => "dashboard"} do
+      resources :people
+  end
 
   resources :students, only: [:index, :show, :auth]
   devise_for :admins
