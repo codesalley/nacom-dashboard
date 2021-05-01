@@ -1,5 +1,5 @@
 class AdminsController <  ApplicationController
-    before_action :authenticate_dashboard_admin!
+    before_action :authenticate_admin!
     def index 
         @student = Student.new
         @departments = Department.all
