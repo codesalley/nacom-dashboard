@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  
+
   resources :students, only: [:index, :show, :auth]
   devise_for :admins
   resources :messages
@@ -10,15 +12,20 @@ Rails.application.routes.draw do
 
   post '/student', to: 'students#index'
 
+  get '/checkToken', to: 'students#checkToken'
+
   post '/auth', to:'students#auth'
   # student messages route
-  get '/messages', to: 'students#messages'
+  get '/message', to: 'students#messages'
   # announcements routes
-  get '/announcements', to: 'students#announcements'
+  get '/announce', to: 'students#announcements'
   # rsults routes 
-  get '/results', to: 'students#results'
+  get '/result', to: 'students#results'
 
   get '/me', to: 'students#welcome'
+
+
+  # dashboard enpoints 
 
   get '/new_student', to: 'admins#new_student'
   post '/add_student', to: 'admins#add_student'

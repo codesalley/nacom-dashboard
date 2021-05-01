@@ -1,7 +1,7 @@
 class StudentsController < ApplicationController
     respond_to :json
     before_action :authorized, except: %i[index]
-    skip_before_action :verify_authenticity_token, only: [:index]
+		skip_before_action :verify_authenticity_token
 
 
     def index 
@@ -44,8 +44,19 @@ class StudentsController < ApplicationController
         data = studentResults.results
         render json: data
     end
-
-
+		def checkToken 
+			token = request.headers[:token]
+			if !token
+				render json: {msg: false}, status: 401
+				return
+			end
+			if !auth(token)
+				render json: {msg: false}, status: 401
+				return
+			end
+			render json: {msg: true}, status: 200
+			return
+		end
 
     def authorized 
         token = request.headers[:token]
@@ -70,14 +81,13 @@ class StudentsController < ApplicationController
     def auth(t)
         return false unless t.present?
         if t
-        begin
+        	begin
             decoded = JWT.decode t, JWT_TOKEN, true, {algorithm: 'HS256'}
-            return true
-        rescue 
+           	 return true
+        	rescue 
             return false
-        end
-    end
-
+        	end
+    		end
     end
 
 
