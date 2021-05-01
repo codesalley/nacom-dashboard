@@ -1,4 +1,4 @@
-class StudentsController < ApplicationController
+class API::StudentsController < ApplicationController
     respond_to :json
     before_action :authorized, except: %i[index]
 		skip_before_action :verify_authenticity_token
