@@ -38,11 +38,16 @@ class StudentsController < ApplicationController
         
     end
     def results 
+        res = []
         hashed = getUser
         id = hashed[0]['id']
         studentResults = Student.find_by(id: id)
         data = studentResults.results
-        render json: data
+        data.each do |ele| 
+            
+            res <<  [ele,  ele.semister]
+        end
+        render json: res
     end
 		def checkToken 
 			token = request.headers[:token]
