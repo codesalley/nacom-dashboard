@@ -1,12 +1,25 @@
 class StudentsController < ApplicationController
     respond_to :json
     before_action :authorized, except: %i[index]
+		skip_before_action :verify_authenticity_token
 
 
     def index 
         student_inx = params[:index_number]
         student_password = params[:password]
         auth_user(student_inx, student_password)
+    end
+    def welcome
+        hashed = getUser
+        id = hashed[0]['id']
+        studentdata = Student.find_by(id: id)
+        render json: {first_name: studentdata.first_name,
+                        middle_name: studentdata.middle_name, 
+                            last_name: studentdata.last_name, 
+                                index_number: studentdata.index_number, 
+                                email: studentdata.email, 
+                                passport: !studentdata.passport.nil? ? false : studentdata.passport ,
+                                phone_number: studentdata.phone_number} 
     end
     def messages 
         hashed = getUser
@@ -25,23 +38,39 @@ class StudentsController < ApplicationController
         
     end
     def results 
+        res = []
         hashed = getUser
         id = hashed[0]['id']
         studentResults = Student.find_by(id: id)
         data = studentResults.results
-        render json: data
+        data.each do |ele| 
+            
+            res <<  [ele,  ele.semister]
+        end
+        render json: res
     end
-
-
+		def checkToken 
+			token = request.headers[:token]
+			if !token
+				render json: {msg: false}, status: 401
+				return
+			end
+			if !auth(token)
+				render json: {msg: false}, status: 401
+				return
+			end
+			render json: {msg: true}, status: 200
+			return
+		end
 
     def authorized 
         token = request.headers[:token]
         if !token
-            render json: {msg: 'Invalid request'}
+            render json: {msg: 'Invalid request'}, status: 401
             return
         end
         if !auth(token)
-            render json: {msg: 'Invalid request'}
+            render json: {msg: 'Invalid request'}, status: 401
             return
         end
 
@@ -57,14 +86,13 @@ class StudentsController < ApplicationController
     def auth(t)
         return false unless t.present?
         if t
-        begin
+        	begin
             decoded = JWT.decode t, JWT_TOKEN, true, {algorithm: 'HS256'}
-            return true
-        rescue 
+           	 return true
+        	rescue 
             return false
-        end
-    end
-
+        	end
+    		end
     end
 
 
@@ -72,7 +100,7 @@ class StudentsController < ApplicationController
 
         student = Student.find_by(index_number: idx)
         if !student || student.password != psw 
-            render json: {msg: 'invalid credentials'} 
+            render json: {msg: 'invalid credentials'}, status: 401
             return 
         end
         if student.password === psw 
